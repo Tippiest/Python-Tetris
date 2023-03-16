@@ -335,23 +335,39 @@ def main(win):  # *
                 pygame.display.quit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+                if event.key == (pygame.K_LEFT or pygame.K_a):
                     current_piece.x -= 1
                     if not(valid_space(current_piece, grid)):
                         current_piece.x += 1
-                if event.key == pygame.K_RIGHT:
+                if event.key == (pygame.K_RIGHT or pygame.K_d):
                     current_piece.x += 1
                     if not(valid_space(current_piece, grid)):
                         current_piece.x -= 1
-                if event.key == pygame.K_DOWN:
-                    current_piece.y += 1
-                    if not(valid_space(current_piece, grid)):
-                        current_piece.y -= 1
-                if event.key == pygame.K_UP:
+                while (event.key == (pygame.K_DOWN or pygame.K_s)):
+                      current_piece.y += 1
+                      if not(valid_space(current_piece, grid)):
+                          current_piece.y -= 1
+                          break
+                if event.key == pygame.K_UP :
                     current_piece.rotation += 1
                     if not(valid_space(current_piece, grid)):
                         current_piece.rotation -= 1
 
+                if event.key == pygame.K_x:
+                  current_piece.rotation += 1
+                  if not(valid_space(current_piece, grid)):
+                    current_piece.rotation -= 1
+
+                if event.key == pygame.K_z:
+                  current_piece.rotation -= 1
+                  if not(valid_space(current_piece, grid)):
+                    current_piece.rotation += 1
+
+                if event.key == pygame.K_SPACE:
+                  current_piece.y = 10
+                  if not(valid_space(current_piece, grid)):
+                    current_piece.y -= 1
+      
         shape_pos = convert_shape_format(current_piece)
 
         for i in range(len(shape_pos)):
